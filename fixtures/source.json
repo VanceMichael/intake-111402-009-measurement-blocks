@@ -1,0 +1,259 @@
+{
+  "exchanges": [
+    {
+      "path": "/manifest",
+      "method": "GET",
+      "body": {
+        "fileId": "bench1",
+        "revision": "v1",
+        "blocks": [
+          {
+            "id": "data1",
+            "next": null,
+            "compression": "none",
+            "sha256": "804c810bd9d43c273f88771181245067982c5bb76af2d0fe41d55aef1a0c0a02"
+          }
+        ],
+        "groups": [
+          {
+            "recordId": 1,
+            "recordSize": 12,
+            "master": "time",
+            "channels": [
+              {
+                "name": "time",
+                "offset": 1,
+                "type": "float64",
+                "conversion": null
+              },
+              {
+                "name": "load",
+                "offset": 9,
+                "type": "int16",
+                "invalidationBit": 0,
+                "conversion": "c1"
+              }
+            ],
+            "invalidationOffset": 11
+          }
+        ],
+        "conversions": {
+          "c1": {
+            "type": "linear",
+            "factor": 0.1,
+            "offset": 0
+          }
+        }
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    },
+    {
+      "path": "/blocks/data1",
+      "method": "GET",
+      "body": {
+        "data": "AQAAAAAAAPA/CgAAAQAAAAAAAABAFAAB"
+      },
+      "requires": {},
+      "sets": {},
+      "status": 200,
+      "query": {}
+    }
+  ],
+  "cases": {
+    "compressed": [
+      {
+        "path": "/manifest",
+        "method": "GET",
+        "body": {
+          "fileId": "bench1",
+          "revision": "v2",
+          "blocks": [
+            {
+              "id": "data1",
+              "next": null,
+              "compression": "zlib",
+              "sha256": "565d5230c58a2678f4c67dd730ec54d1b8a029259bd6c870e9a54cbeadff97c8"
+            }
+          ],
+          "groups": [
+            {
+              "recordId": 1,
+              "recordSize": 12,
+              "master": "time",
+              "channels": [
+                {
+                  "name": "time",
+                  "offset": 1,
+                  "type": "float64",
+                  "conversion": null
+                },
+                {
+                  "name": "load",
+                  "offset": 9,
+                  "type": "int16",
+                  "invalidationBit": 0,
+                  "conversion": "c1"
+                }
+              ],
+              "invalidationOffset": 11
+            }
+          ],
+          "conversions": {
+            "c1": {
+              "type": "linear",
+              "factor": 0.1,
+              "offset": 0
+            }
+          }
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      },
+      {
+        "path": "/blocks/data1",
+        "method": "GET",
+        "body": {
+          "data": "eJxjZACDD/ZcDAyMEDaDgwgDIwAV7wGR"
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      }
+    ],
+    "bad-reference": [
+      {
+        "path": "/manifest",
+        "method": "GET",
+        "body": {
+          "fileId": "bench1",
+          "revision": "v1",
+          "blocks": [
+            {
+              "id": "data1",
+              "next": "missing",
+              "compression": "none",
+              "sha256": "804c810bd9d43c273f88771181245067982c5bb76af2d0fe41d55aef1a0c0a02"
+            }
+          ],
+          "groups": [
+            {
+              "recordId": 1,
+              "recordSize": 12,
+              "master": "time",
+              "channels": [
+                {
+                  "name": "time",
+                  "offset": 1,
+                  "type": "float64",
+                  "conversion": null
+                },
+                {
+                  "name": "load",
+                  "offset": 9,
+                  "type": "int16",
+                  "invalidationBit": 0,
+                  "conversion": "c1"
+                }
+              ],
+              "invalidationOffset": 11
+            }
+          ],
+          "conversions": {
+            "c1": {
+              "type": "linear",
+              "factor": 0.1,
+              "offset": 0
+            }
+          }
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      }
+    ],
+    "interleaved": [
+      {
+        "path": "/manifest",
+        "method": "GET",
+        "body": {
+          "fileId": "bench1",
+          "revision": "v3",
+          "blocks": [
+            {
+              "id": "data1",
+              "next": null,
+              "compression": "none",
+              "sha256": "100d07a7d22c43ad421abc51db2a84a4f5b8c7003c9bf4d3ae5673c759929741"
+            }
+          ],
+          "groups": [
+            {
+              "recordId": 1,
+              "recordSize": 12,
+              "master": "time",
+              "channels": [
+                {
+                  "name": "time",
+                  "offset": 1,
+                  "type": "float64",
+                  "conversion": null
+                },
+                {
+                  "name": "load",
+                  "offset": 9,
+                  "type": "int16",
+                  "invalidationBit": 0,
+                  "conversion": "c1"
+                }
+              ],
+              "invalidationOffset": 11
+            },
+            {
+              "recordId": 2,
+              "recordSize": 10,
+              "master": "time",
+              "channels": [
+                {
+                  "name": "time",
+                  "offset": 1,
+                  "type": "float64",
+                  "conversion": null
+                }
+              ],
+              "invalidationOffset": 9
+            }
+          ],
+          "conversions": {
+            "c1": {
+              "type": "linear",
+              "factor": 0.1,
+              "offset": 0
+            }
+          }
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      },
+      {
+        "path": "/blocks/data1",
+        "method": "GET",
+        "body": {
+          "data": "AQAAAAAAAPA/CgAAAQAAAAAAAABAFAABAgAAAAAAAAhAAA=="
+        },
+        "requires": {},
+        "sets": {},
+        "status": 200,
+        "query": {}
+      }
+    ]
+  }
+}
